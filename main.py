@@ -17,15 +17,22 @@ def letter_count():
             letter.split()
             for l in letter:
                 i = l.lower()
-                if i in letters_dict:
-                    letters_dict[i] += 1
-                else:
-                    letters_dict[i] = 1
-    return letters_dict
-
+                if i.isalpha() == True:
+                    if i in letters_dict:
+                        letters_dict[i] += 1
+                    else:
+                        letters_dict[i] = 1
+    sorted_dict = sorted([(value, key)
+                          for(key,value) in letters_dict.items()],
+                          reverse=True)  
+    return sorted_dict
 
 def main():
-    print(word_count())
-    print(letter_count())
+    print("--- Begin report of books/frankenstein.txt ---")
+    print(f"{word_count()} words found in the document")
+    dict = letter_count()
+    for i in range(0, len(dict)):
+        print(f"The {dict[i][1]} character was found {dict[i][0]} times")
+    print("---End report---")
 
 main()
